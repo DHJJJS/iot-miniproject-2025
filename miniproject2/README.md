@@ -74,28 +74,89 @@ ERD
 - 라즈베리파이, 아두이노 등 사용 디바이스 구성 및 구현
 - C# 시뮬레이션으로 동작을 만드는 윈앱 구현
 
-1. Visual Studio 프로젝트 생성
+1. Visual Studio, WPF MVVM 프로젝트 생성
+2. NuGet 패키지 설치
+    - CommunityToolkit.Mvvm
+    - MahApps.Metro, IconPacks
+    - MQTTNet
+    - Newtonsoft.Json
+3. View, ViewModel 구성
+4. WPF 애니메이션 기능으로 컨베이어벨트 구현
 
+    https://github.com/user-attachments/assets/9f760628-0bd8-48e4-b880-32cb2a312876    
+
+5. 선별결과 MQTT로 전달 기능 추가
+
+    <img src="../image/mp0005.png" width="600">
 
 ##### MQTT Subscriber
 - WPF 과목에서 사용했던 MQTT Subscriber 그대로 사용
 - WpfMqttSubApp 프로젝트 가져오기
 - SmartHome 작업했던 부분 수정 DB 저장부분 변경
 
+1. 서비스 실행 중 확인
+    - 콘솔에서 `telnet ip주소 포트번호` 화면이 전환되면 접속성공
+2. MainViewModel.cs 현재 Publish에 맞게 수정
+    - BrokerIP, Topic...
+3. EntityFramework 사용, Database 테이블 모델화(DBFirst)
+    ```shell
+    PM> Scaffold-DbContext "Server=localhost;Database=miniproject;Uid=root;Password=*****;Charset=utf8" Pomelo.EntityFrameworkCore.MySql -OutputDir Models -Force -Context IoTDbContext
+    ```
+4. config.json 파일, 설정파일 로드 클래스 작업
+5. 구독 결과
+
+    <img src="../image/mp0004.png" width="600">
+
 ##### WPF 공정관리 앱 개발
-- 
+- 기본적인 DB관리 앱 + 실시간 공정 모니터링 + 리포트 시각화
 
+1. CommunityToolkit.Mvvm, MahApps.Metro 초기 설정
+2. MainView.xaml UI 디자인
+3. SettingView.xaml 생성
+4. Helpers.Common 클래스 정적 인스턴스 변수 작성
+5. SettingView 화면 UI 구현
+6. SetttngViewModel과 연동 작업
+7. Model DB 테이블 클래스 가져오기
+8. Setting 관련, DB연동 조회/입력/수정/삭제 기능 구현
 
-#### 파이썬 AI + ASP.NET 연동
+9. ScheduleView, ScheduleViewModel 초기 구현
+    - SettingView.xaml 복사 후 이름 변경, 클래스명 변경
+    - SettingViewModel.cs 복사 후 이름 변경, 클래스명 변경
+10. ScheduleView 데이터그리드, 입력양식 수정
+
+11. EntityFramework용 패키지 설치
+    - Microsoft.EntityFrameworkCore
+    - Microsoft.EntityFrameworkCore.Tools
+    - Pomelo.EntityFrameworkCore.MySql
+
+12. ScheduleViewModel EntityFramework DB연동 처리
+
+    <img src="../image/mp0006.png" width="600">
+
+13. MonitoringView, MonitoringViewModel 생성
+14. WpfIotSimulatorApp 화면 이전
+15. Monitoring DB연동, MQTT통신, 애니메이션 작업
+16. MQTT로 전송된 공정 성공/실패여부 DB 저장작업
+    - 기본 IoT Simulator 애니메이션 가져오기
+    - 공정계획 순번으로 DB조회
+    - Start버튼 눌러서 IoT Simulator 동작시키고 동기화
+    - 체크이후 성공/실패 결과 DB에 저장, 실시간 시각화
+
+https://github.com/user-attachments/assets/39c28599-421b-4a96-96a8-6237f451e479
+
+##### 추후 작업(MiniProject 3)
+1. ReportView, ReportViewModel LiveChart 작업
+2. MainView 상태표시줄 완성
+3. 예외처리 마무리
+
+#### 파이썬 AI + ASP.NET 연동(MiniProject 3)
 - 참조소스
 - iot-webapp-2025/ref/ReferencedSolution/ConvertWebApp 
 - hungout-with-springboot/003_aicombo/
 
-
 ### 파이널프로젝트 관련
 
 #### 주제 선정
-
 
 #### 프로젝트 주제 발표
 
